@@ -1,0 +1,32 @@
+\section{Experiment and Results}
+There are 14993 pet profiles in the training data set and contains 23 features. 
+\subsection{Data Preprocessing}
+Since we adopt the Xgboost method, the missing value is not a problem. We combine the breed and color features into one feature. For example, if the pet has two breeds, we combine the two breeds into one feature. If the pet has three colors, we combine the three colors into one feature. We also add one more column named hard-interaction which conbines pet's type, gender, vaccinated, dewormed and sterilized status. Some profiles contain multiple pets so we calculate the average fees and photos to create a new column. Furthermore, there are some pets without a name, we think this matters for the adoption speed so we add one more column to indicate whether the pet has a name and also the name length and strangeness of the name.\footnote{We assume the name is strange if it contains number and special characters.} The breed of the pet is also an important factor. Thus, we add features to consider the breed name, breed number, mixed breed, domestic breed and whether it's pure. 
+
+\subsection{Feature Engineering}
+To better train the model, we do a feature engineering. We briefly introduce the features we add in this section and leave the details in the appendix code. We add the following features:
+Color, Breed, State, State-Breed1-Color1, State-BreedFull-ColorFull, Name, RescuerID, Hard-Interaction. For each one, we calculate the mean, minimum, maximum and standard deviation. After that we drop the mentioned features and only keep the new features since they are highly correlated. After this, we get a new 136 numerical features. 
+
+\subsection{Model}
+\subsubsection{Xgboost Classifier}
+Intuitively, we think the Xgboost classifier is a good choice for this problem since the predicted variable has 5 values. We use the Xgboost classifier to train the model. To find the best hyperparameters, we do a grid search and find the best hyperparameters.\footnote{It costs us 4 hours. The hyperparameters are shown in the appendix for brevity.} This model gives us an average of $\kappa=0.40$ which is not good enough. 
+
+\subsubsection{Xgboost Regressor}
+Since the Xgboost classifier does not give us a good result, we try the Xgboost regressor. We do a new grid search for the best hyperparameters. In this case, we choose the best hyperparameters as follows:
+\begin{itemize}
+    \item objective: reg:squarederror
+    \item eval\_metric: rmse
+    \item max\_depth: 7
+    \item subsample: 0.8
+    \item colsample\_bytree: 0.8
+    \item $\alpha$: 0.05
+    \item $\eta$: 0.01
+\end{itemize}
+To be clear, since we use a regression model, the predicted value is not an integer. We use the following method to convert the predicted value to an integer:
+\begin{enumerate}
+    \item Calculate the c.d.f. of the AdoptionSpeed in the training set and store the result in a list $c=[c_0,c_1,c_2,c_3]$. 
+    \item Predict the values for the training set and have the minimum $p_{\min}$ and the gap between maximum and minimum as $\delta$. We then have the cutoff value as cutoff values$=p_{\min}+\delta c=[d_0,d_1,d_2,d_3]$.
+    \item Predict the values for the validation set, and for each value $v$, we find the smallest $i$ such that $v\leq d_i$. Then we set the predicted value as $i$. If no such $i$ exists, we set the predicted value as $4$.
+\end{enumerate}
+This gives us an average of $\kappa=0.4694$ with a standard error $0.01058$ for a 5-fold crossvalidation, which is better than the Xgboost classifier.  
+

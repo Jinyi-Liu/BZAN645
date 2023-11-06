@@ -1,0 +1,52 @@
+\section{Problem Statement}
+
+\subsection{Data}
+The training data set consists of 14993 pet profiles. Each profile contains the following features: 
+\begin{itemize}
+    \item \textbf{AdoptionSpeed} - Categorical speed of adoption. Lower is faster. \textbf{This is the value to predict.}
+    \item \textbf{PetID} - Unique hash ID of pet profile
+    \item \textbf{Type} - Type of animal 
+    \item \textbf{Name} - Name of pet 
+    \item \textbf{Age} - Age of pet when listed, in months
+    \item \textbf{Breed1, Breed2} - Breeds of pet 
+    \item \textbf{Gender} - Gender of pet 
+    \item \textbf{{Color1, Color2, Color3}} - Colors of pet 
+    \item \textbf{MaturitySize} - Size at maturity 
+    \item \textbf{FurLength} - Fur length 
+    \item \textbf{Vaccinated} - Pet has been vaccinated
+    \item \textbf{Dewormed} - Pet has been dewormed 
+    \item \textbf{Sterilized} - Pet has been spayed / neutered 
+    \item \textbf{Health} - Health Condition 
+    \item \textbf{Quantity} - Number of pets represented in profile
+    \item \textbf{Fee} - Adoption fee 
+    \item \textbf{State} - State location in Malaysia 
+    \item \textbf{RescuerID} - Unique hash ID of rescuer
+    \item \textbf{VideoAmt} - Total uploaded videos for this pet
+    \item \textbf{PhotoAmt} - Total uploaded photos for this pet
+    % \item \textbf{Description} - Profile write-up for this pet. The primary language used is English, with some in Malay or Chinese.
+\end{itemize}
+
+\subsection{Aim}
+Animal adoption rates are strongly correlated to the metadata associated with their online profiles. In this project, we use this dataset to create an algorithm that predicts how quickly a pet will be adopted. The adoption speed is determined by how quickly, if at all, a pet is adopted. The values are determined in the following way:
+\begin{enumerate}
+    \item[0 --]  Pet was adopted on the same day as it was listed.
+    \item[1 --]  Pet was adopted between 1 and 7 days (1st week) after being listed.
+    \item[2 --]  Pet was adopted between 8 and 30 days (1st month) after being listed.
+    \item[3 --] Pet was adopted between 31 and 90 days (2nd \& 3rd month) after being listed.
+    \item[4 --] No adoption after 100 days of being listed. (There are no pets in this dataset that waited between 90 and 100 days).
+\end{enumerate}
+
+\subsection{Model}
+Since the adoption speed to be predicted is categorical, we adopt a xgboost model. This model is a gradient boosting algorithm that is optimized for speed and performance. It is based on decision trees and is a popular choice for machine learning competitions.
+
+\subsection{Evaluation}
+We use quadratic weighted kappa to evaluate the performance of our model. Predicted results have 5 possible ratings, $0,1,2,3,4$. The quadratic weighted kappa is calculated as follows. First, an $\mathrm{N} \times \mathrm{N}$ histogram matrix $O$ is constructed, such that $O_{i, j}$ corresponds to the number of adoption records that have a rating of $i$ (actual) and received a predicted rating j. An $\mathrm{N}\times \mathrm{N}$ matrix of weights, $w$, is calculated based on the difference between actual and predicted rating scores:
+$$
+w_{i, j}=\frac{(i-j)^2}{(N-1)^2}
+$$
+An $\mathrm{N}\times \mathrm{N}$ histogram matrix of expected ratings, $E$, is calculated, assuming that there is no correlation between rating scores. This is calculated as the outer product between the actual rating's histogram vector of ratings and the predicted rating's histogram vector of ratings, normalized such that $E$ and $O$ have the same sum.
+From these three matrices, the quadratic weighted kappa is calculated as:
+$$
+\kappa=1-\frac{\sum_{i, j} w_{i, j} O_{i, j}}{\sum_{i, j} w_{i, j} E_{i, j}}.
+$$  
+The metric $\kappa$ typically varies in $[0,1]$. The higher the $\kappa$, the better the agreement between the raters. A value of $0$ indicates agreement equivalent to chance, and a value of $1$ indicates perfect agreement. In the event that there is less agreement between the raters than expected by chance, $\kappa$ can be negative.
