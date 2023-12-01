@@ -1,0 +1,1 @@
+Problem: Create a regression tree model such that the leaf node predicts a function instead of a mean. For example, see a new formulation in Ali Aouad, Adam N. Elmachtoub, Kris J. Ferreira, Ryan McNellis (2023) Market Segmentation Trees. Manufacturing & Service Operations Management 25(2):648-667. https://doi.org/10.1287/msom.2023.1195
