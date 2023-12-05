@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.2)  6 DEC 2023 10:59
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.2)  6 DEC 2023 11:39
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -987,7 +987,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 11.39996pt on input line 30.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 9.49997pt on input line 30.
-<utkbeamerfront.png, id=25, 614.295pt x 421.575pt>
+<utkbeamerfront.png, id=29, 614.295pt x 421.575pt>
 File: utkbeamerfront.png Graphic file (type png)
 <use utkbeamerfront.png>
 Package pdftex.def Info: utkbeamerfront.png  used on input line 30.
@@ -997,7 +997,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
  [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc} <./utkbeamerfront.png>]
-<utkbeamerbottom.png, id=36, 1846.9pt x 452.69125pt>
+<utkbeamerbottom.png, id=40, 1846.9pt x 452.69125pt>
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
 Package pdftex.def Info: utkbeamerbottom.png  used on input line 34.
@@ -1050,15 +1050,66 @@ Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
 ]
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 18.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+<Pictures/network.png, id=90, 447.92343pt x 424.58624pt>
+File: Pictures/network.png Graphic file (type png)
+<use Pictures/network.png>
+Package pdftex.def Info: Pictures/network.png  used on input line 18.
+(pdftex.def)             Requested size: 215.10196pt x 203.88977pt.
+
+Overfull \vbox (2.59337pt too high) detected at line 18
+ []
+
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 18.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [6
+[6
 
-]) (./Sections/4.tex
+ <./Pictures/network.png>]
+File: utkbeamerbottom.png Graphic file (type png)
+<use utkbeamerbottom.png>
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 20.
+(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+ (./slides.toc)
+File: utkbeamerbottom.png Graphic file (type png)
+<use utkbeamerbottom.png>
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 20.
+(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+ [7
+
+]
+File: utkbeamerbottom.png Graphic file (type png)
+<use utkbeamerbottom.png>
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 40.
+(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+<Pictures/loss-stratify.png, id=111, 462.528pt x 346.896pt>
+File: Pictures/loss-stratify.png Graphic file (type png)
+<use Pictures/loss-stratify.png>
+Package pdftex.def Info: Pictures/loss-stratify.png  used on input line 40.
+(pdftex.def)             Requested size: 245.83282pt x 184.37802pt.
+LaTeX Font Info:    Font shape `T1/phv/m/n' will be
+(Font)              scaled to size 8.54997pt on input line 40.
+File: utkbeamerbottom.png Graphic file (type png)
+<use utkbeamerbottom.png>
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 40.
+(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+ [8
+
+ <./Pictures/loss-stratify.png>]
+<Pictures/kappa-stratify.png, id=120, 462.528pt x 346.896pt>
+File: Pictures/kappa-stratify.png Graphic file (type png)
+<use Pictures/kappa-stratify.png>
+Package pdftex.def Info: Pictures/kappa-stratify.png  used on input line 40.
+(pdftex.def)             Requested size: 245.83282pt x 184.37802pt.
+File: utkbeamerbottom.png Graphic file (type png)
+<use utkbeamerbottom.png>
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 40.
+(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
+ [9
+
+ <./Pictures/kappa-stratify.png>]) (./Sections/4.tex
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
 Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
@@ -1068,18 +1119,18 @@ File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
 Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [7
+ [10
 
 ]
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 16.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 16.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [8
+ [11
 
 ])
 \tf@nav=\write7
@@ -1097,24 +1148,24 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: 6E7BA5C8AFB6D36D8633E87507EA9D44;345.
+(rerunfilecheck)             Checksum: 78C9F4B7E7AB4D84B1835A34FCE4895A;464.
 Package logreq Info: Writing requests to 'slides.run.xml'.
 \openout1 = `slides.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31207 strings out of 474928
- 610017 string characters out of 5763562
- 1927785 words of memory out of 5000000
- 52161 multiletter control sequences out of 15000+600000
- 583401 words of font info for 75 fonts, out of 8000000 for 9000
+ 31285 strings out of 474928
+ 611687 string characters out of 5763562
+ 1928785 words of memory out of 5000000
+ 52227 multiletter control sequences out of 15000+600000
+ 586291 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  128i,18n,123p,759b,5050s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on slides.pdf (8 pages, 105322 bytes).
+Output written on slides.pdf (11 pages, 172165 bytes).
 PDF statistics:
- 124 PDF objects out of 1000 (max. 8388607)
- 90 compressed objects within 1 object stream
- 20 named destinations out of 1000 (max. 500000)
- 95 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 166 PDF objects out of 1000 (max. 8388607)
+ 120 compressed objects within 2 object streams
+ 29 named destinations out of 1000 (max. 500000)
+ 118 words of extra memory for PDF output out of 10000 (max. 10000000)
 

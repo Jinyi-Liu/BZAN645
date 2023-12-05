@@ -7,5 +7,10 @@
 
 \section{Discussion}
 \begin{frame}{Discussion}
-
+\begin{enumerate}
+    \item The model is not good enough since the $\kappa$ score is lower than the XGBoost model.
+    \item During the feature engineering process, many NaN values are generated. We need to find a way to deal with them in neural network since XGBoost can handle NaN values without any problem.
+    \item I try to fill the NaN by 0 and mean value, but the result is not good. 
+    \item I might need to enlarge the network and add more layers.
+\end{enumerate}
 \end{frame}
