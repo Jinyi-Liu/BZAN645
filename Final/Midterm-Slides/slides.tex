@@ -1,0 +1,44 @@
+\documentclass[notheorems]{beamer}
+\usepackage{ragged2e}
+\let\olditemize=\itemize 
+\renewenvironment{itemize}{\olditemize\justifying}{\endlist}
+\let\oldenumerate=\enumerate 
+\renewenvironment{enumerate}{\oldenumerate\justifying}{\endlist}
+
+\setlength{\leftmargini}{1pt}
+\setlength{\parskip}{.3\baselineskip} 
+\usetheme{utk}
+\usefonttheme{professionalfonts}
+
+\title[]{PetFinder: Predicting Adoption Speed of Pets}
+\author{Jinyi Liu}
+\institute{Business Analytics \& Statistics}
+
+
+\usepackage[style=apa,citestyle=authoryear,natbib]{biblatex}
+\setbeamertemplate{bibliography item}{\insertbiblabel}
+\addbibresource{reference.bib}
+\usepackage{cleveref}
+\usepackage{mathrsfs}
+
+\begin{document}
+\input{theorem settings}
+
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Outline}
+    \tableofcontents %[currentsection]
+\end{frame}
+
+\input{Sections/1.tex}
+\input{Sections/2.tex}
+\input{Sections/3.tex}
+\input{Sections/4.tex}
+
+
+
+
+\end{document}

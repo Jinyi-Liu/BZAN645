@@ -25,7 +25,8 @@ to_drop_columns = [
     "Breed2Name",
 ]
 data_df.drop(cols_to_drop + to_drop_columns, axis=1, inplace=True)
-data_df.fillna(-1, inplace=True)
+# Fill missing values with mean
+data_df.fillna(data_df.mean(), inplace=True)
 
 # Embedding the categorical variables using nn.Embedding
 cat_cols = [
@@ -59,11 +60,16 @@ emb_szs = [
     (c, min(20, (c + 1) // 2)) for _, c in emb_c.items()
 ]  # embedding sizes for the chosen columns
 
-# Split data into train and validation
-train_df = data_df.iloc[: len(data_df) * 4 // 5, :]
-valid_df = data_df.iloc[len(data_df) * 4 // 5 :, :]
-train_df.shape, valid_df.shape
+# Split data into train and validation by AdoptionSpeed and stratify
+from sklearn.model_selection import train_test_split
 
+train_df, valid_df = train_test_split(
+    data_df, test_size=0.2, random_state=42, stratify=data_df["AdoptionSpeed"]
+)
+
+# train_df = data_df.iloc[: len(data_df) * 4 // 5, :]
+# valid_df = data_df.iloc[len(data_df) * 4 // 5 :, :]
+# train_df.shape, valid_df.shape
 
 X_train = train_df.drop(columns="AdoptionSpeed")
 y_train = train_df["AdoptionSpeed"]
@@ -223,20 +229,24 @@ def val_loss(model, valid_dl):
         correct.append(weighted_kappa)
         # correct += (pred == y.view(-1, 1)).sum().item()
 
-    print("valid loss %.3f and accuracy %.3f" % (sum_loss / total, np.mean(correct)))
+    # print("valid loss %.3f and kappa %.3f" % (sum_loss / total, np.mean(correct)))
     return sum_loss / total, np.mean(correct)
 
 
 def train_loop(model, epochs, lr=0.01, wd=0.01, train_dl=None, valid_dl=None):
     optim = get_optimizer(model, lr=lr, wd=wd)
+    history = []
     for i in range(epochs):
-        loss, train_accuracy = train_model(model, optim, train_dl)
+        train_loss, train_kappa = train_model(model, optim, train_dl)
+        valua_loss, val_kappa = val_loss(model, valid_dl)
         if i % 50 == 0:
             print(
-                "episode: %d\ntraining loss: %.3f, accuracy: %.3f"
-                % (i, loss, train_accuracy)
+                "episode: %d\ntraining loss: %.3f, kappa: %.3f"
+                % (i, train_loss, train_kappa)
             )
-            val_loss(model, valid_dl)
+            print("validation loss: %.3f, kappa: %.3f" % (valua_loss, val_kappa))
+        history.append([train_loss, train_kappa, valua_loss, val_kappa])
+    return history
 
 
 model = PetFinderModel(emb_szs, n_cont)
@@ -254,8 +264,36 @@ valid_dl = DataLoader(valid_ds, batch_size=batch_size, shuffle=True)
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
 
-train_loop(
-    model, epochs=5000, lr=0.00005, wd=0.0001, train_dl=train_dl, valid_dl=valid_dl
+
+# Train model
+epochs = 5000
+history = train_loop(
+    model, epochs=epochs, lr=0.00005, wd=0.0001, train_dl=train_dl, valid_dl=valid_dl
 )
 # Save model
-torch.save(model.state_dict(), "./model.pt")
+torch.save(model.state_dict(), "./model-stratify.pt")
+# Save history
+history = np.array(history)
+np.save("./history.npy", history)
+
+import matplotlib.pyplot as plt
+
+# range(epochs)
+plt.plot(range(epochs), history[:, 0], label="train_loss")
+plt.plot(range(epochs), history[:, 2], label="val_loss")
+plt.xlabel("Epochs")
+plt.ylabel("Loss")
+plt.title("Loss vs Epochs")
+plt.legend()
+# plt.show()
+plt.savefig(path + "/figure/loss-statify.png")
+
+plt.clf()
+plt.plot(range(epochs), history[:, 1], label="train_kappa")
+plt.plot(range(epochs), history[:, 3], label="val_kappa")
+plt.xlabel("Epochs")
+plt.ylabel("Kappa")
+plt.title("Quadratic Weighted Kappa vs Epochs")
+plt.legend()
+# plt.show()
+plt.savefig(path + "/figure/kappa-stratify.png")

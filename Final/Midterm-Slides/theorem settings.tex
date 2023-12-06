@@ -1,0 +1,48 @@
+\setbeamertemplate{theorem}[ams style]
+\setbeamertemplate{theorems}[numbered]
+\addtobeamertemplate{theorem begin}{}{\justifying}
+\apptocmd{\frame}{}{\justifying}{}
+\makeatletter
+    \ifbeamer@countsect
+      \newtheorem{theorem}{\translate{Theorem}}[section]
+    \else
+      \newtheorem{theorem}{\translate{Theorem}}
+    \fi
+    \newtheorem{corollary}{\translate{Corollary}}
+    \newtheorem{fact}{\translate{Fact}}
+    \newtheorem{lemma}[theorem]{\translate{Lemma}}
+    \newtheorem{problem}{\translate{Problem}}
+    \newtheorem{solution}{\translate{Solution}}
+    \newtheorem{proposition}{\translate{Proposition}}
+    \newtheorem{assumption}{\translate{Assumption}}
+
+    \theoremstyle{definition}
+    \newtheorem{definition}{\translate{Definition}}
+    \newtheorem{definitions}{\translate{Definitions}}
+
+    \theoremstyle{example}
+    \newtheorem{example}{\translate{Example}}
+    \newtheorem{examples}{\translate{Examples}}
+
+
+    % Compatibility
+    \newtheorem{Beispiel}{Beispiel}
+    \newtheorem{Beispiele}{Beispiele}
+    \theoremstyle{plain}
+    \newtheorem{Loesung}{L\"osung}
+    \newtheorem{Satz}{Satz}
+    \newtheorem{Folgerung}{Folgerung}
+    \newtheorem{Fakt}{Fakt}
+    \newenvironment{Beweis}{\begin{proof}[Beweis.]}{\end{proof}}
+    \newenvironment{Lemma}{\begin{lemma}}{\end{lemma}}
+    \newenvironment{Proof}{\begin{proof}}{\end{proof}}
+    \newenvironment{Theorem}{\begin{theorem}}{\end{theorem}}
+    \newenvironment{Problem}{\begin{problem}}{\end{problem}}
+    \newenvironment{Corollary}{\begin{corollary}}{\end{corollary}}
+    \newenvironment{Example}{\begin{example}}{\end{example}}
+    \newenvironment{Examples}{\begin{examples}}{\end{examples}}
+    \newenvironment{Definition}{\begin{definition}}{\end{definition}}
+    \newenvironment{Assumption}{\begin{assumption}}{\end{assumption}}
+\makeatother
+
+\newcommand{\tg}{\tilde{g}}
