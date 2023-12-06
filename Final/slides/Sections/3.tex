@@ -7,33 +7,5 @@
 
 \section{Experiment and Results}
 \begin{frame}{Experiment and Results}
-\only<1>{
-    \framesubtitle{Model}
-    Since the adoption speed to be predicted is categorical, we adopt a xgboost model. This model is a gradient boosting algorithm that is optimized for speed and performance. It is based on decision trees and is a popular choice for machine learning competitions.
-}
-\only<2>{
-    \framesubtitle{Data Preprocessing}
-    Since we adopt the Xgboost method, the missing value is not a problem as Xgboost can handle it. We combine the breed and color features into one feature, and add one more column which combines pet's type, gender, vaccinated, dewormed and sterilized status. Furthermore, there are some pets without names, so we add a column to indicate whether the pet has a name or not, and also the length of the name. Besides, the breed of the pet is also an important factor. We add some columns about the breed. For brevity, we leave the details in the code and the report.
-}
-\only<3>{
-    \framesubtitle{Feature Engineering}
-    To better train the model, we do a feature engineering. We briefly introduce the features we add in this section and leave the details in the appendix code. We add the following features: Color, Breed, State, Hard-Interaction, State-BreedFull-ColorFull, Name, RescuerID, etc. For each one, we calculate the mean, minimum, maximum and standard deviation. After that we drop the mentioned features and only keep the new features since they are highly correlated. After this, we get a new 136 numerical features.
-}
-\only<4>{
-    \framesubtitle{Model Training --- Classifier}
-    Intuitively, we think the Xgboost classifier is a good choice for this problem since the predicted variable has 5 values. We use the Xgboost classifier to train the model. To find the best hyperparameters, we do a grid search and find the best hyperparameters. This model gives us an average of $\kappa=0.40$ which is not good enough. 
-}
-\only<5>{
-    \framesubtitle{Model Training --- Regressor}
-    Since the Xgboost classifier does not give us a good result, we try the Xgboost regressor. We do a new grid search for the best hyperparameters. In this case, we choose the best hyperparameters as follows:
-    \begin{itemize}
-        \item max\_depth: 7
-        \item subsample: 0.8
-        \item colsample\_bytree: 0.8
-        \item $\alpha$: 0.05
-        \item $\eta$: 0.01
-    \end{itemize}
-    This gives us an average of $\kappa=0.4694$ with a standard error $0.01058$ for a 5-fold crossvalidation, which is better than the Xgboost classifier.  
-}
 
 \end{frame}

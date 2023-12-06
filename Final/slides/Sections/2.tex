@@ -1,32 +1,12 @@
-\AtBeginSection[ ]
-{
-\begin{frame}{Outline}
-    \tableofcontents[currentsection]
-\end{frame}
-}
+% \AtBeginSection[ ]
+% {
+% \begin{frame}{Outline}
+%     \tableofcontents[currentsection]
+% \end{frame}
+% }
 
 
-\section{Problem Statement}
-\begin{frame}\frametitle{Problem Statement}
-    \only<1>{
-        \framesubtitle{Aim}
-        The training data contains 14993 pet profiles, each with 23 features (we don't use the description). For each pet, the outcome is a number from 0 to 4, indicating how quickly a pet is adopted. The task is to predict this number for each pet in the test set.
-    }
-    \only<2>{\framesubtitle{Evaluation}
-        An $\mathrm{N} \times \mathrm{N}$ histogram matrix $O$ is constructed, such that $O_{i, j}$ corresponds to the number of adoption records that have a rating of $i$ (actual) and received a predicted rating $j$.
+% \section{Problem Statement}
+% \begin{frame}\frametitle{Problem Statement}
 
-        An $\mathrm{N}\times \mathrm{N}$ matrix of weights, $w$, is calculated based on the difference between actual and predicted rating scores:
-        $$
-        w_{i, j}=\frac{(i-j)^2}{(N-1)^2}.
-        $$
-    }
-    \only<3>{
-        \framesubtitle{Evaluation}
-        An $\mathrm{N}\times \mathrm{N}$ histogram matrix of expected ratings, $E$, is calculated as the outer product between the actual rating's histogram vector of ratings and the predicted rating's histogram vector of ratings, normalized such that $E$ and $O$ have the same sum.
-        From these three matrices, the quadratic weighted kappa is calculated as:
-        $$
-        \kappa=1-\frac{\sum_{i, j} w_{i, j} O_{i, j}}{\sum_{i, j} w_{i, j} E_{i, j}}.
-        $$  
-        What we want is a $\kappa$ score as close to 1 as possible.
-    }
-\end{frame}
+% \end{frame}

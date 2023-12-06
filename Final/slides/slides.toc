@@ -1,4 +1,3 @@
 \beamer@sectionintoc {1}{Motivation}{3}{0}{1}
-\beamer@sectionintoc {2}{Problem Statement}{5}{0}{2}
-\beamer@sectionintoc {3}{Experiment and Results}{9}{0}{3}
-\beamer@sectionintoc {4}{Discussion and Implication}{15}{0}{4}
+\beamer@sectionintoc {2}{Experiment and Results}{5}{0}{2}
+\beamer@sectionintoc {3}{Discussion}{7}{0}{3}

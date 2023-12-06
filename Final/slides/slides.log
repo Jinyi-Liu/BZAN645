@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.2)  6 DEC 2023 10:41
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023) (preloaded format=pdflatex 2023.10.2)  6 DEC 2023 10:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/jliu113/OneDrive - University of Tennessee/Projects/BZAN645/Final/Midterm-Slides/slides"
-(c:/Users/jliu113/OneDrive - University of Tennessee/Projects/BZAN645/Final/Midterm-Slides/slides.tex
+**"c:/Users/jliu113/OneDrive - University of Tennessee/Projects/BZAN645/Final/slides/slides"
+(c:/Users/jliu113/OneDrive - University of Tennessee/Projects/BZAN645/Final/slides/slides.tex
 LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
 (c:/texlive/2023/texmf-dist/tex/latex/beamer/beamer.cls
@@ -987,7 +987,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 11.39996pt on input line 30.
 LaTeX Font Info:    Font shape `T1/phv/m/n' will be
 (Font)              scaled to size 9.49997pt on input line 30.
-<utkbeamerfront.png, id=29, 614.295pt x 421.575pt>
+<utkbeamerfront.png, id=25, 614.295pt x 421.575pt>
 File: utkbeamerfront.png Graphic file (type png)
 <use utkbeamerfront.png>
 Package pdftex.def Info: utkbeamerfront.png  used on input line 30.
@@ -997,7 +997,7 @@ LaTeX Font Info:    Font shape `T1/phv/m/n' will be
  [1
 
 {c:/texlive/2023/texmf-var/fonts/map/pdftex/updmap/pdftex.map}{c:/texlive/2023/texmf-dist/fonts/enc/dvips/base/8r.enc} <./utkbeamerfront.png>]
-<utkbeamerbottom.png, id=40, 1846.9pt x 452.69125pt>
+<utkbeamerbottom.png, id=36, 1846.9pt x 452.69125pt>
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
 Package pdftex.def Info: utkbeamerbottom.png  used on input line 34.
@@ -1027,103 +1027,36 @@ Package pdftex.def Info: utkbeamerbottom.png  used on input line 9.
 ]
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 15.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 17.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 15.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 17.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
  [4
 
-]) (./Sections/2.tex
+]) (./Sections/2.tex) (./Sections/3.tex
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 9.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
  (./slides.toc)
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 9.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
  [5
 
 ]
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 32.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
-LaTeX Font Info:    Font shape `T1/phv/m/n' will be
-(Font)              scaled to size 8.54997pt on input line 32.
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 32.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
  [6
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 32.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [7
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 32.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [8
-
-]) (./Sections/3.tex
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- (./slides.toc)
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [9
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [10
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [11
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [12
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [13
-
-]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 39.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [14
 
 ]) (./Sections/4.tex
 File: utkbeamerbottom.png Graphic file (type png)
@@ -1135,48 +1068,18 @@ File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
 Package pdftex.def Info: utkbeamerbottom.png  used on input line 8.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [15
+ [7
 
 ]
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 38.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
 File: utkbeamerbottom.png Graphic file (type png)
 <use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 38.
+Package pdftex.def Info: utkbeamerbottom.png  used on input line 11.
 (pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [16
-
-]
-<Pictures/xgb_feature_importance.png, id=174, 1408.5423pt x 643.9257pt>
-File: Pictures/xgb_feature_importance.png Graphic file (type png)
-<use Pictures/xgb_feature_importance.png>
-Package pdftex.def Info: Pictures/xgb_feature_importance.png  used on input line 38.
-(pdftex.def)             Requested size: 307.28987pt x 140.4752pt.
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 38.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [17
-
- <./Pictures/xgb_feature_importance.png>]
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 38.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
- [18
-
-]
-Overfull \hbox (0.57127pt too wide) in paragraph at lines 38--38
-[]\T1/phv/m/n/10.95 Thus, to im-prove the adop-tion speed, we can do the fol-low-ing things:
- []
-
-File: utkbeamerbottom.png Graphic file (type png)
-<use utkbeamerbottom.png>
-Package pdftex.def Info: utkbeamerbottom.png  used on input line 38.
-(pdftex.def)             Requested size: 62.59596pt x 15.34155pt.
-[19
+ [8
 
 ])
 \tf@nav=\write7
@@ -1194,24 +1097,24 @@ LaTeX2e <2023-06-01> patch level 1
 L3 programming layer <2023-08-29>
  ***********
 Package rerunfilecheck Info: File `slides.out' has not changed.
-(rerunfilecheck)             Checksum: 25CC19C883802707033E37CA981E4949;562.
+(rerunfilecheck)             Checksum: 6E7BA5C8AFB6D36D8633E87507EA9D44;345.
 Package logreq Info: Writing requests to 'slides.run.xml'.
 \openout1 = `slides.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 31296 strings out of 474928
- 611872 string characters out of 5763562
+ 31207 strings out of 474928
+ 610017 string characters out of 5763562
  1927785 words of memory out of 5000000
- 52224 multiletter control sequences out of 15000+600000
- 586291 words of font info for 77 fonts, out of 8000000 for 9000
+ 52161 multiletter control sequences out of 15000+600000
+ 583401 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 128i,18n,123p,767b,5050s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb><c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
-Output written on slides.pdf (19 pages, 224061 bytes).
+ 128i,18n,123p,759b,5050s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<c:/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb><c:/texlive/2023/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb>
+Output written on slides.pdf (8 pages, 105322 bytes).
 PDF statistics:
- 240 PDF objects out of 1000 (max. 8388607)
- 180 compressed objects within 2 object streams
- 43 named destinations out of 1000 (max. 500000)
- 108 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 124 PDF objects out of 1000 (max. 8388607)
+ 90 compressed objects within 1 object stream
+ 20 named destinations out of 1000 (max. 500000)
+ 95 words of extra memory for PDF output out of 10000 (max. 10000000)
 
