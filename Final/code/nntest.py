@@ -5,9 +5,10 @@ from torch.utils.data import Dataset, DataLoader
 import torch.optim as torch_optim
 import torch.nn as nn
 import torch.nn.functional as F
+from functions import quadratic_weighted_kappa
 
-# path = '/app/code'
-path = "."
+path = "/app/Final/code"
+# path = "."
 # This is the dataset processed from the midterm
 train_size = 14993
 data_df = pd.read_csv(path + "/data/data_df_proc.csv")[:train_size]
@@ -24,6 +25,8 @@ to_drop_columns = [
     "Breed2Name",
 ]
 data_df.drop(cols_to_drop + to_drop_columns, axis=1, inplace=True)
+data_df.fillna(-1, inplace=True)
+
 # Embedding the categorical variables using nn.Embedding
 cat_cols = [
     "Breed1",
@@ -44,10 +47,16 @@ for cat_col in cat_cols:
     label_encoders[cat_col] = LabelEncoder()
     data_df[cat_col] = label_encoders[cat_col].fit_transform(data_df[cat_col])
 
+# Normalize the continuous variables
+# cont_cols = data_df.columns.difference(cat_cols + ["AdoptionSpeed"])
+# data_df[cont_cols] = data_df[cont_cols].apply(
+#     lambda x: (x - x.mean()) / x.std(), axis=0
+# )
+
 emb_c = {n: len(col.unique()) for n, col in data_df.items() if n in cat_cols}
 emb_cols = emb_c.keys()  # names of columns chosen for embedding
 emb_szs = [
-    (c, min(30, (c + 1) // 2)) for _, c in emb_c.items()
+    (c, min(20, (c + 1) // 2)) for _, c in emb_c.items()
 ]  # embedding sizes for the chosen columns
 
 # Split data into train and validation
@@ -124,16 +133,19 @@ class PetFinderModel(nn.Module):
             e.embedding_dim for e in self.embeddings
         )  # length of all embeddings combined
         self.n_emb, self.n_cont = n_emb, n_cont
-        self.lin1 = nn.Linear(self.n_emb + self.n_cont, 200)
-        self.lin2 = nn.Linear(200, 30)
-        self.lin4 = nn.Linear(30, 1)
+        self.lin1 = nn.Linear(self.n_emb + self.n_cont, 512)
+        self.lin2 = nn.Linear(512, 256)
+        self.lin3 = nn.Linear(256, 128)
+        self.lin4 = nn.Linear(128, 32)
+        self.lin5 = nn.Linear(32, 1)
         # self.lin4 = nn.Sequential(nn.Linear(30, 1), nn.Softmax(dim=1))
-        self.bn1 = nn.SELU()
-        self.bn2 = nn.SELU()
-        self.bn3 = nn.SELU()
-        self.bn4 = nn.SELU()
+        self.bn1 = nn.ReLU()
+        self.bn2 = nn.ReLU()
+        self.bn3 = nn.ReLU()
+        self.bn4 = nn.ReLU()
+        self.output = nn.ReLU()
         self.emb_drop = nn.Dropout(0.2)
-        self.drops = nn.Dropout(0.3)
+        self.drops = nn.Dropout(0.1)
 
     def forward(self, x_cat, x_cont):
         x = [e(x_cat[:, i]) for i, e in enumerate(self.embeddings)]
@@ -148,10 +160,12 @@ class PetFinderModel(nn.Module):
         x = self.lin2(x)
         x = self.bn3(x)
         x = self.drops(x)
-        # x = self.lin3(x)
-        # x = self.bn4(x)
-        # x = self.drops(x)
-        # x = self.lin4(x)
+        x = self.lin3(x)
+        x = self.bn4(x)
+        x = self.drops(x)
+        x = self.lin4(x)
+        x = self.output(x)
+        x = self.lin5(x)
         # map x to [0,4]
         x = torch.sigmoid(x) * 4
         return x
@@ -166,25 +180,33 @@ def train_model(model, optim, train_dl):
     model.train()
     total = 0
     sum_loss = 0
+    correct = []
     for x1, x2, y in train_dl:
         batch = y.shape[0]
-        print(batch)
+        # print(batch)
         output = model(x1, x2)
+        # Use cross entropy loss for classification
         loss = F.mse_loss(output, y.view(-1, 1))
-        print(output, y.view(-1, 1))
         optim.zero_grad()
         loss.backward()
         optim.step()
         total += batch
         sum_loss += batch * (loss.item())
-    return sum_loss / total
+
+        pred = torch.round(output).cpu().detach().numpy().reshape(-1).astype(int)
+        weighted_kappa = quadratic_weighted_kappa(
+            y.view(-1, 1).cpu().detach().numpy().reshape(-1).astype(int), pred
+        )
+        correct.append(weighted_kappa)
+
+    return sum_loss / total, np.mean(correct)
 
 
 def val_loss(model, valid_dl):
     model.eval()
     total = 0
     sum_loss = 0
-    correct = 0
+    correct = []
     for x1, x2, y in valid_dl:
         current_batch_size = y.shape[0]
         output = model(x1, x2)
@@ -192,20 +214,29 @@ def val_loss(model, valid_dl):
         loss = F.mse_loss(output, y.view(-1, 1))
         sum_loss += current_batch_size * (loss.item())
         total += current_batch_size
-        pred = torch.round(output)[0]
-        # pred = torch.round(torch.max(output, 1)[0])
-        correct += (pred == y).float().sum().item()
+        pred = torch.round(output)
+        # convert to numpy array
+        pred = pred.cpu().detach().numpy().reshape(-1).astype(int)
+        weighted_kappa = quadratic_weighted_kappa(
+            y.view(-1, 1).cpu().detach().numpy().reshape(-1).astype(int), pred
+        )
+        correct.append(weighted_kappa)
+        # correct += (pred == y.view(-1, 1)).sum().item()
 
-    print("valid loss %.3f and accuracy %.3f" % (sum_loss / total, correct / total))
-    return sum_loss / total, correct / total
+    print("valid loss %.3f and accuracy %.3f" % (sum_loss / total, np.mean(correct)))
+    return sum_loss / total, np.mean(correct)
 
 
 def train_loop(model, epochs, lr=0.01, wd=0.01, train_dl=None, valid_dl=None):
     optim = get_optimizer(model, lr=lr, wd=wd)
     for i in range(epochs):
-        loss = train_model(model, optim, train_dl)
-        print("training loss: %.3f" % loss)
-        val_loss(model, valid_dl)
+        loss, train_accuracy = train_model(model, optim, train_dl)
+        if i % 50 == 0:
+            print(
+                "episode: %d\ntraining loss: %.3f, accuracy: %.3f"
+                % (i, loss, train_accuracy)
+            )
+            val_loss(model, valid_dl)
 
 
 model = PetFinderModel(emb_szs, n_cont)
@@ -223,4 +254,8 @@ valid_dl = DataLoader(valid_ds, batch_size=batch_size, shuffle=True)
 train_dl = DeviceDataLoader(train_dl, device)
 valid_dl = DeviceDataLoader(valid_dl, device)
 
-train_loop(model, epochs=5, lr=0.005, wd=0.0001, train_dl=train_dl, valid_dl=valid_dl)
+train_loop(
+    model, epochs=5000, lr=0.00005, wd=0.0001, train_dl=train_dl, valid_dl=valid_dl
+)
+# Save model
+torch.save(model.state_dict(), "./model.pt")
