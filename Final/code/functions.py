@@ -23,7 +23,6 @@ from numpy.random import normal
 warnings.filterwarnings(action="ignore", category=FutureWarning)
 
 
-
 def getScore(pred, cdf, valid=False):
     num = pred.shape[0]
     output = np.asarray([4] * num, dtype=int)
@@ -128,5 +127,3 @@ def quadratic_weighted_kappa(y, y_pred):
             denominator += d * expected_count / num_scored_items
 
     return 1.0 - numerator / denominator
-
-
