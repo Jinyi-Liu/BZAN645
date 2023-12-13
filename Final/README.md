@@ -74,4 +74,9 @@ In this project, we use the embeddings of the categorical features as the input 
 
 Also, there might be some other ways to use the embeddings of the categorical features. For example, we can use the embeddings as the only input of a neural network to predict the adoption speed directly. This may be a good way to use the embeddings of the categorical features and avoid the problem of combining the embeddings and the continuous features.
 
+
+## Code
 The code is in https://github.com/Jinyi-Liu/BZAN645/tree/main/Final.
+### How to run the code
+1. Run nn.ipynb to get the embeddings of the categorical features.
+2. Run final.ipynb to get the prediction result of the XGBoost model with the embeddings of the categorical features.
