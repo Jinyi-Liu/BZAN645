@@ -7,73 +7,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 from functions import quadratic_weighted_kappa
 
-path = "/app/Final/code"
-# path = "."
-# This is the dataset processed from the midterm
-train_size = 14993
-data_df = pd.read_csv(path + "/data/data_df_proc.csv")[:train_size]
-data_df.head()
-
-cols_to_drop = ["Name", "RescuerID", "VideoAmt", "Description", "PetID", "PhotoAmt"]
-to_drop_columns = [
-    "PetID",
-    "Name",
-    "RescuerID",
-    "Description",
-    "BreedName_full",
-    "Breed1Name",
-    "Breed2Name",
-]
-data_df.drop(cols_to_drop + to_drop_columns, axis=1, inplace=True)
-# Fill missing values with mean
-data_df.fillna(data_df.mean(), inplace=True)
-
-# Embedding the categorical variables using nn.Embedding
-cat_cols = [
-    "Breed1",
-    "Breed2",
-    "Gender",
-    "Color1",
-    "Color2",
-    "Color3",
-    "State",
-    "Breed_full",
-    "Color_full",
-    "hard_interaction",
-]
-from sklearn.preprocessing import LabelEncoder
-
-label_encoders = {}
-for cat_col in cat_cols:
-    label_encoders[cat_col] = LabelEncoder()
-    data_df[cat_col] = label_encoders[cat_col].fit_transform(data_df[cat_col])
-
-# Normalize the continuous variables
-# cont_cols = data_df.columns.difference(cat_cols + ["AdoptionSpeed"])
-# data_df[cont_cols] = data_df[cont_cols].apply(
-#     lambda x: (x - x.mean()) / x.std(), axis=0
-# )
-
-emb_c = {n: len(col.unique()) for n, col in data_df.items() if n in cat_cols}
-emb_cols = emb_c.keys()  # names of columns chosen for embedding
-emb_szs = [
-    (c, min(20, (c + 1) // 2)) for _, c in emb_c.items()
-]  # embedding sizes for the chosen columns
-
-# Split data into train and validation by AdoptionSpeed and stratify
-from sklearn.model_selection import train_test_split
-
-train_df, valid_df = train_test_split(
-    data_df, test_size=0.2, random_state=42, stratify=data_df["AdoptionSpeed"]
-)
-
-X_train = train_df.drop(columns="AdoptionSpeed")
-y_train = train_df["AdoptionSpeed"]
-X_valid = valid_df.drop(columns="AdoptionSpeed")
-y_valid = valid_df["AdoptionSpeed"]
-
-n_cont = len(X_train.columns) - len(emb_cols)  # number of continuous columns
-
 
 class PetFinderData(Dataset):
     def __init__(self, X, Y, emb_cols):
@@ -152,8 +85,7 @@ class PetFinderModel(nn.Module):
     def forward(self, x_cat, x_cont):
         x = [e(x_cat[:, i]) for i, e in enumerate(self.embeddings)]
         x = torch.cat(x, 1)
-        x = self.emb_drop(x)
-        x2 = self.bn1(x_cont)
+        x2 = x_cont
 
         x = torch.cat([x, x2], 1)
         x = self.lin1(x)
@@ -243,53 +175,3 @@ def train_loop(model, epochs, lr=0.01, wd=0.01, train_dl=None, valid_dl=None):
             print("validation loss: %.3f, kappa: %.3f" % (valua_loss, val_kappa))
         history.append([train_loss, train_kappa, valua_loss, val_kappa])
     return history
-
-
-model = PetFinderModel(emb_szs, n_cont)
-device = get_default_device()
-to_device(model, device)
-
-train_ds = PetFinderData(X_train, y_train, emb_cols)
-valid_ds = PetFinderData(X_valid, y_valid, emb_cols)
-
-# Get data into device
-batch_size = 512
-train_dl = DataLoader(train_ds, batch_size=batch_size, shuffle=True)
-valid_dl = DataLoader(valid_ds, batch_size=batch_size, shuffle=True)
-
-train_dl = DeviceDataLoader(train_dl, device)
-valid_dl = DeviceDataLoader(valid_dl, device)
-
-
-# Train model
-epochs = 5000
-history = train_loop(
-    model, epochs=epochs, lr=0.00005, wd=0.0001, train_dl=train_dl, valid_dl=valid_dl
-)
-# Save model
-torch.save(model.state_dict(), "./model-stratify.pt")
-# Save history
-history = np.array(history)
-np.save("./history.npy", history)
-
-import matplotlib.pyplot as plt
-
-# range(epochs)
-plt.plot(range(epochs), history[:, 0], label="train_loss")
-plt.plot(range(epochs), history[:, 2], label="val_loss")
-plt.xlabel("Epochs")
-plt.ylabel("Loss")
-plt.title("Loss vs Epochs")
-plt.legend()
-# plt.show()
-plt.savefig(path + "/figure/loss-statify.png")
-
-plt.clf()
-plt.plot(range(epochs), history[:, 1], label="train_kappa")
-plt.plot(range(epochs), history[:, 3], label="val_kappa")
-plt.xlabel("Epochs")
-plt.ylabel("Kappa")
-plt.title("Quadratic Weighted Kappa vs Epochs")
-plt.legend()
-# plt.show()
-plt.savefig(path + "/figure/kappa-stratify.png")
